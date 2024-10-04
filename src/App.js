@@ -62,7 +62,7 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div className="App" style={{ margin: "40px" }}>
       <h1>DroneDeploy Challenge</h1>
 
       <form onSubmit={handleSubmit}>
