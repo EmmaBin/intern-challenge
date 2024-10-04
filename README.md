@@ -22,7 +22,42 @@ This is a web application provides a frontend interface to interact with drone d
 
 ## Installation
 
-### 1. Clone the Repository
+### Clone the Repository and Run Backend
 ```bash
-git clone <repository-url>
-cd <repository-directory>
+git clone https://github.com/EmmaBin/intern-challenge.git
+cd intern-challenge
+cd drone-data-backend
+python -m venv venv
+source venv/bin/activate  # On Windows use: venv\Scripts\activate
+pip install -r requirements.txt
+
+### Create Your .env File
+
+touch .env
+REACT_APP_OPENAI="your_openai_api_key"
+
+### Run backend
+python app.py
+
+
+### Run frontend 
+```bash
+cd ../drone-bot-frontend
+npm install
+npm start
+
+This will start the React app, and it will open in your browser at http://localhost:3000/
+
+
+### Run testing
+cd ../drone-bot-frontend
+npm test
+
+
+cd ../drone-data-backend
+source venv/bin/activate  # On Windows use: venv\Scripts\activate
+python test_app.py
+
+
+
+
