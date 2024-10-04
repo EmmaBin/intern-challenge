@@ -1,9 +1,43 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import imageData from './image_data.json'
 
 function App() {
   const [formData, setFormData] = useState('');
   const [response, setResponse] = useState('');
+  const [sortedData, setSortedData] = useState(imageData)
+  const [sortCriteria, setSortCriteria] = useState({
+    field: '',
+    lowToHigh: true
+  })
+
+
+  function handleSort() {
+    let data = [...imageData];
+
+    if (sortCriteria.field) {
+
+      data.sort((a, b) => {
+        if (sortCriteria.field === 'altitude') {
+          return sortCriteria.lowToHigh ? a.altitude_m - b.altitude_m : b.altitude_m - a.altitude_m;
+        } else if (sortCriteria.field === 'battery') {
+          return sortCriteria.lowToHigh ? a.battery_level_pct - b.battery_level_pct : b.battery_level_pct - a.battery_level_pct;
+        } else if (sortCriteria.field === 'timestamp') {
+          return sortCriteria.lowToHigh
+            ? new Date(a.timestamp) - new Date(b.timestamp)
+            : new Date(b.timestamp) - new Date(a.timestamp);
+        }
+        return 0;
+      });
+
+    }
+
+    setSortedData(data);
+  }
+  useEffect(() => {
+    handleSort();
+  }, [sortCriteria]);
+
+
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -35,7 +69,7 @@ function App() {
         <label htmlFor='question'>Ask a question:</label>
         <input
           type="text"
-          className="question"
+          id="question"
           value={formData}
           onChange={(e) => setFormData(e.target.value)}
           placeholder='What is the altitude of the second image?'
@@ -52,10 +86,48 @@ function App() {
       )}
 
 
-      <h2>Drone Data Cards</h2>
+      <h2>Filter and Sort Drone Data</h2>
+
+      <div>
+        <label htmlFor="sort">Sort By:</label>
+        <select
+          id="sort"
+          value={sortCriteria.field}
+          onChange={(e) =>
+            setSortCriteria({ ...sortCriteria, field: e.target.value })
+          }
+        >
+          <option value="" disabled>
+            Select your option
+          </option>
+          <option value="altitude">Altitude</option>
+          <option value="battery">Battery Level</option>
+          <option value="timestamp">Timestamp</option>
+        </select>
+      </div>
+
+      <div>
+        <label htmlFor="sortOrder">Sort Order:</label>
+        <select
+          id="sortOrder"
+          value={sortCriteria.lowToHigh ? 'true' : 'false'}
+          onChange={() =>
+            setSortCriteria((prev) => ({
+              ...prev,
+              lowToHigh: !prev.lowToHigh,
+            }))
+          }
+        >
+          <option value="true">Low to High</option>
+          <option value="false">High to Low</option>
+        </select>
+      </div>
+
+
+      <h3>Drone Data Cards</h3>
       <div>
         {(
-          imageData.map((data, index) => (
+          sortedData.map((data, index) => (
             <div key={index} style={{ border: '1px solid #ccc', padding: '16px', margin: '16px' }}>
               <h3>Image ID: {data.image_id}</h3>
               <p><strong>Timestamp:</strong> {data.timestamp}</p>
