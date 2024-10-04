@@ -73,17 +73,16 @@ function App() {
           value={formData}
           onChange={(e) => setFormData(e.target.value)}
           placeholder='What is the altitude of the second image?'
+          style={{ width: '50%' }}
           required
         />
         <button type="submit">Submit</button>
       </form>
 
-      {response && (
-        <div className="response">
-          <h2>Response:</h2>
-          <p>{response}</p>
-        </div>
-      )}
+      <div className="response" style={{ border: '1px solid #ccc', padding: '16px', margin: '16px', minHeight: '100px' }}>
+        <h2>Response:</h2>
+        <p>{response ? response : 'Waiting for response...'}</p>
+      </div>
 
 
       <h2>Filter and Sort Drone Data</h2>
