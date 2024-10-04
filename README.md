@@ -23,41 +23,81 @@ This is a web application provides a frontend interface to interact with drone d
 ## Installation
 
 ### Clone the Repository and Run Backend
-```bash
-git clone https://github.com/EmmaBin/intern-challenge.git
-cd intern-challenge
-cd drone-data-backend
-python -m venv venv
-source venv/bin/activate  # On Windows use: venv\Scripts\activate
-pip install -r requirements.txt
 
-### Create Your .env File
+1. **Clone the Repository**:
+    ```bash
+    git clone https://github.com/EmmaBin/intern-challenge.git
+    cd intern-challenge
+    ```
 
-touch .env
-REACT_APP_OPENAI="your_openai_api_key"
+2. **Set Up Backend**:
+    ```bash
+    cd drone-data-backend
+    python -m venv venv
+    source venv/bin/activate  # On Windows use: venv\Scripts\activate
+    pip install -r requirements.txt
+    ```
 
-### Run backend
-python app.py
+3. **Create Your `.env` File**:
+    - Create a `.env` file in the `drone-data-backend` directory:
+        ```bash
+        touch .env
+        ```
+    - Open the `.env` file and add the following line:
+        ```env
+        REACT_APP_OPENAI="your_openai_api_key"
+        ```
+    Replace `"your_openai_api_key"` with your actual OpenAI API key.
 
+4. **Run Backend**:
+    ```bash
+    python app.py
+    ```
+    The backend server will start at `http://127.0.0.1:5000/`.
 
-### Run frontend 
-```bash
-cd ../drone-bot-frontend
-npm install
-npm start
+### Run Frontend
 
-This will start the React app, and it will open in your browser at http://localhost:3000/
+1. **Navigate to the Frontend Directory**:
+    ```bash
+    cd ../drone-bot-frontend
+    ```
 
+2. **Install Frontend Dependencies**:
+    ```bash
+    npm install
+    ```
 
-### Run testing
-cd ../drone-bot-frontend
-npm test
+3. **Start the React App**:
+    ```bash
+    npm start
+    ```
+    This will start the React app, and it will open in your browser at [http://localhost:3000/](http://localhost:3000/).
 
+### Run Testing
 
-cd ../drone-data-backend
-source venv/bin/activate  # On Windows use: venv\Scripts\activate
-python test_app.py
+#### Frontend Testing
+1. **Navigate to the Frontend Directory**:
+    ```bash
+    cd ../drone-bot-frontend
+    ```
 
+2. **Run Frontend Tests**:
+    ```bash
+    npm test
+    ```
 
+#### Backend Testing
+1. **Navigate to the Backend Directory**:
+    ```bash
+    cd ../drone-data-backend
+    ```
 
+2. **Activate the Virtual Environment**:
+    ```bash
+    source venv/bin/activate  # On Windows use: venv\Scripts\activate
+    ```
 
+3. **Run Backend Tests**:
+    ```bash
+    python test_app.py
+    ```
