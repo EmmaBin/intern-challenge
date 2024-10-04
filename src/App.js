@@ -10,7 +10,7 @@ function App() {
     lowToHigh: true
   })
 
-
+  // This function is called when the user selects a sorting criteria and updates the sortedData
   function handleSort() {
     let data = [...imageData];
 

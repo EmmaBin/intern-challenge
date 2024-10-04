@@ -14,6 +14,7 @@ class UnitTestCase(unittest.TestCase):
         self.app = app.test_client()
         self.app.testing = True
 
+    #check if the response contains the correct altitude for the first image
     def test_process_question(self):
         response = self.app.post('/process-question', json={'question': 'What is the altitude of the first image?'})
         self.assertEqual(response.status_code, 200)
@@ -22,6 +23,7 @@ class UnitTestCase(unittest.TestCase):
         expected_altitude = image_data[0]['altitude_m']
         self.assertIn(str(expected_altitude), response_as_text)
 
+    #check the correct latitude for the second image is included in the response
     def test_mock_response(self):
         response = self.app.post('/process-question', json={'question': 'What is the latitude of the second image?'})
         self.assertEqual(response.status_code, 200)

@@ -19,6 +19,7 @@ print("JSON file path:", json_file_path)
 with open(json_file_path, 'r') as f:
     image_data = json.load(f)
 
+# This function serves as a fallback response generator if the ask_openai function doesn't work
 def mock_response(user_question):
 
     if "first" in user_question.lower():
@@ -55,6 +56,7 @@ def mock_response(user_question):
 
 def ask_openai(user_question):
     try:
+        # constructs the config for the OpenAI API call with predefined data
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo", 
             messages=[

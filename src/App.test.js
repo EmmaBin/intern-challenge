@@ -16,7 +16,7 @@ test('handles form submission', async () => {
   fireEvent.change(inputElement, { target: { value: 'What is the altitude of the second image?' } });
 
   fireEvent.click(buttonElement);
-
+  //check if the input field cleared after sending the request to backend
   await waitFor(() => {
     expect(inputElement.value).toBe('');
   });
