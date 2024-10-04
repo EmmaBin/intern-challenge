@@ -19,6 +19,39 @@ print("JSON file path:", json_file_path)
 with open(json_file_path, 'r') as f:
     image_data = json.load(f)
 
+def mock_response(user_question):
+
+    if "first" in user_question.lower():
+        image_id =0
+    elif "second" in user_question.lower():
+        image_id =1
+    elif "third" in user_question.lower():
+        image_id =2
+    elif "fourth" in user_question.lower():
+        image_id =3
+    elif "last" in user_question.lower() or "fifth" in user_question.lower():
+        image_id=4
+    else:
+        match = re.search(r'image (\d+)', user_question.lower())
+        if match:
+            image_id = int(match.group(1)) - 1
+        else:
+            image_id = None
+
+    if image_id is not None and 0 <= image_id < len(image_data):
+        if "altitude" in user_question.lower():
+            return f"The altitude of image {image_id + 1} is {image_data[image_id]['altitude_m']} meters."
+        elif "battery" in user_question.lower():
+            return f"The battery level during image {image_id + 1} is {image_data[image_id]['battery_level_pct']}%."
+        elif "longitude" in user_question.lower():
+            return f"The longitude of image {image_id + 1} is {image_data[image_id]['longitude']}."
+        elif "latitude" in user_question.lower():
+            return f"The latitude of image {image_id + 1} is {image_data[image_id]['latitude']}."
+        elif "gps accuracy" in user_question.lower():
+            return f"The GPS accuracy of image {image_id + 1} is {image_data[image_id]['gps_accuracy_m']} meters."
+    return "Information is not available at the moment."
+
+
 
 def ask_openai(user_question):
     try:
@@ -35,7 +68,7 @@ def ask_openai(user_question):
         return response['choices'][0]['message']['content'].strip()
     except Exception as e:
         print(f"error: {e}")
-        return "Unable to get a response from the AI service."
+        return mock_response(user_question)
 
 
 @app.route('/process-question', methods=['POST'])
