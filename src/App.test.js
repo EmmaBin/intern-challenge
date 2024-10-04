@@ -1,8 +1,24 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
+test('renders the DroneDeploy Challenge header', () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  const expectedHeader = screen.getByText(/DroneDeploy Challenge/i);
+  expect(expectedHeader).toBeInTheDocument();
 });
+
+test('handles form submission', async () => {
+  render(<App />);
+
+  const inputElement = screen.getByLabelText(/Ask a question:/i);
+  const buttonElement = screen.getByRole('button', { name: /submit/i });
+
+  fireEvent.change(inputElement, { target: { value: 'What is the altitude of the second image?' } });
+
+  fireEvent.click(buttonElement);
+
+  await waitFor(() => {
+    expect(inputElement.value).toBe('');
+  });
+});
+
