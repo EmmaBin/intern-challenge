@@ -15,6 +15,7 @@ This is a web application provides a frontend interface to interact with drone d
 - Use a OpenAI service to interpret the question and handle natural language queries.
 ![Input and Response Example](public/images/api_response.png)
 - If AI integration is not feasible, provide a mock response.
+![Input and Response Example](public/images/mock_response.png)
 - Sorting feature to present the drone data card based on user-selected criteria.
 ![Input and Response Example](public/images/sorting.png)
 - Basic unit tests

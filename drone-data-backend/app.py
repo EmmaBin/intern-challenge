@@ -8,7 +8,7 @@ import re
 import json
 load_dotenv()
 
-openai.api_key = os.getenv('REACT_APP_OPENAI')
+# openai.api_key = os.getenv('REACT_APP_OPENAI')
 app = Flask(__name__)
 CORS(app)
 
