@@ -60,12 +60,34 @@ image_data=[
 "shutter_speed": "1/250",
 "aperture": "f/2.8",
 "color_temp_k": 5400,
-"image_format": "RAW+JPEG", "file_size_mb": 24.9, "drone_speed_mps": 6.7, "battery_level_pct": 82, "gps_accuracy_m": 0.5,
-"gimbal_mode": "Free", "subject_detection": "Yes",
+"image_format": "RAW+JPEG", 
+"file_size_mb": 24.9, 
+"drone_speed_mps": 6.7, 
+"battery_level_pct": 82, 
+"gps_accuracy_m": 0.5,
+"gimbal_mode": "Free", 
+"subject_detection": "Yes",
 "image_tags": ["Thermal Pool", "Bacteria"]}
 
 ]
 
+
+def ask_openai(user_question):
+    try:
+        response = openai.ChatCompletion.create(
+                        model="gpt-3.5-turbo", 
+            messages=[
+                {"role": "system", "content": "You are an expert assistant that answers questions about drone data."},
+                {"role": "user", "content": f"Here is the drone data: {image_data}"},
+                {"role": "user", "content": user_question}
+            ],
+            max_tokens=150,
+            temperature=0.5
+        )
+        return response['choices'][0]['message']['content'].strip()
+    except Exception as e:
+        print(f"error: {e}")
+        return "Unable to get a response from the AI service."
 
 
 @app.route('/process-question', methods=['POST'])
@@ -73,7 +95,9 @@ def process_question():
     data = request.get_json()
     user_question = data.get('question')
     print(user_question)
-    return jsonify({"response": "Send from backend"})
+    response = ask_openai(user_question)
+
+    return jsonify({"response": response})
 
 @app.route('/test', methods=['GET'])
 def test():
