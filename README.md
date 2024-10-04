@@ -33,7 +33,7 @@ This is a web application provides a frontend interface to interact with drone d
 2. **Set Up Backend**:
     ```bash
     cd drone-data-backend
-    python -m venv venv
+    python3 -m venv venv
     source venv/bin/activate  # On Windows use: venv\Scripts\activate
     pip install -r requirements.txt
     ```
@@ -51,7 +51,7 @@ This is a web application provides a frontend interface to interact with drone d
 
 4. **Run Backend**:
     ```bash
-    python app.py
+    python3 app.py
     ```
     The backend server will start at `http://127.0.0.1:5000/`.
 
@@ -59,7 +59,7 @@ This is a web application provides a frontend interface to interact with drone d
 
 1. **Navigate to the Frontend Directory**:
     ```bash
-    cd ../drone-bot-frontend
+    cd .. #go back to root directory
     ```
 
 2. **Install Frontend Dependencies**:
