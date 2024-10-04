@@ -12,7 +12,8 @@ openai.api_key = os.getenv('REACT_APP_OPENAI')
 app = Flask(__name__)
 CORS(app)
 
-json_file_path = '/Users/binma/Desktop/intern/drone-bot/image_data.json'
+current_dir = os.path.dirname(os.path.abspath(__file__))
+json_file_path = os.path.join(current_dir, '..', 'src', 'image_data.json')
 print("JSON file path:", json_file_path)
 
 with open(json_file_path, 'r') as f:
