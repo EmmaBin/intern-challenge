@@ -91,7 +91,7 @@ This web application uses React for the frontend and Python with Flask for the b
 1. **Navigate to the Backend Directory**:
     ```bash
     cd intern-challenge
-    cd drone-data-backend/
+    cd drone-data-backend
     ```
 
 2. **Activate the Virtual Environment**:
