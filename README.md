@@ -1,12 +1,12 @@
 # Drone Bot
 
-This is a web application provides a frontend interface to interact with drone data using a Flask backend. The backend handles requests using OpenAI's API and other data processing features, the frontend allows users to query and sort the drone data.
+This web application uses React for the frontend and Python with Flask for the backend to allow users to interact with predefined drone data. Users can view and sort the drone data, as well as ask questions, which are handled by the OpenAI API or a fallback response if AI is not feasible.
 
 
 ## File Structure
 
 - **`drone-data-backend/`**: Backend directory (Python and Flask application).
-- **`src/App.js`**: Frontend directory (React application).
+- **`src/`**: Frontend directory (React application).
 - **`image_data.json`**: JSON file containing the drone data used in the application.
 
 ## Project feature
@@ -16,6 +16,7 @@ This is a web application provides a frontend interface to interact with drone d
 ![Input and Response Example](public/images/api_response.png)
 - If AI integration is not feasible, provide a mock response.
 ![Input and Response Example](public/images/mock_response.png)
+![Input and Response Example](public/images/mock_response_2.png)
 - Sorting feature to present the drone data card based on user-selected criteria.
 ![Input and Response Example](public/images/sorting.png)
 - Basic unit tests
@@ -59,7 +60,7 @@ This is a web application provides a frontend interface to interact with drone d
 
 1. **Navigate to the Frontend Directory**:
     ```bash
-    cd .. #go back to root directory
+    cd intern-challenge #go back to root directory
     ```
 
 2. **Install Frontend Dependencies**:
@@ -78,18 +79,19 @@ This is a web application provides a frontend interface to interact with drone d
 #### Frontend Testing
 1. **Navigate to the Frontend Directory**:
     ```bash
-    cd ../drone-bot-frontend
+    cd intern-challenge
     ```
 
 2. **Run Frontend Tests**:
     ```bash
-    npm test
+    npm test # You may need to press 'a' to run all tests
     ```
 
 #### Backend Testing
 1. **Navigate to the Backend Directory**:
     ```bash
-    cd ../drone-data-backend
+    cd intern-challenge
+    cd drone-data-backend/
     ```
 
 2. **Activate the Virtual Environment**:
